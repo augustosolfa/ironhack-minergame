@@ -12,15 +12,26 @@ class Board {
     return this.matrix[x][y].getContent();
   }
 
-  select(x, y) {
-    this.matrix[x][y].select();
+  click(e, x, y) {
+    const target = this.matrix[x][y];
+    if (e.button === 2) {
+      target.toggleFlag();
+    } else {
+      target.select();
+    }
     this.renderize();
+    console.log(target.getContent());
   }
 
-  toggleFlag(x, y) {
-    this.matrix[x][y].toggleFlag();
-    this.renderize();
-  }
+  // select(x, y) {
+  //   this.matrix[x][y].select();
+  //   this.renderize();
+  // }
+
+  // toggleFlag(x, y) {
+  //   this.matrix[x][y].toggleFlag();
+  //   this.renderize();
+  // }
 
   renderize() {
     this.render.renderize();

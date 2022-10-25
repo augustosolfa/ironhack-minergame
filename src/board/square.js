@@ -1,6 +1,6 @@
-const squareContent = {
+const squareState = {
   Flag: -2,
-  Empty: -1,
+  Invisible: -1,
   Bomb: 9,
 }
 
@@ -15,7 +15,7 @@ class Square {
 
   getContent() {
     if (!this.visible) {
-      return this.flag ? squareContent.Flag : squareContent.Empty;
+      return this.flag ? squareState.Flag : squareState.Invisible;
     }
     if (this.hasBomb) {
       return 9;
@@ -31,10 +31,13 @@ class Square {
   }
 
   toggleFlag() {
-    this.flag ? false : true;
+    this.flag = !this.flag;
   }
 
   select() {
+    if (this.visible || this.flag) {
+      return;
+    }
     this.visible = true;
     if (this.getContent() === 0) {
       for (let i in this.neighborhood) {
@@ -55,4 +58,4 @@ class Square {
   }
 }
 
-export { Square };
+export { Square, squareState };

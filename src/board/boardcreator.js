@@ -27,7 +27,6 @@ function matrixCreator(width, height) {
       matrix[i][j] = new Square();
     }
   }
-  console.log(matrix);
   return matrix;
 }
 
@@ -38,13 +37,11 @@ function addBombs(board, bombs) {
       coordinates.push([i, j]);
     }
   }
-  console.log(coordinates);
   bombs = bombs <= coordinates.length ? bombs : coordinates.length;
   for (let h = 0; h < bombs; h++) {
     const i = coordinates[h][0];
     const j = coordinates[h][1];
     board.matrix[i][j].addBomb();
-    console.log(board.matrix[i][j])
   }
 }
 

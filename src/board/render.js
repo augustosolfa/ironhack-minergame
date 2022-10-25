@@ -1,3 +1,5 @@
+import { squareState } from './square.js';
+
 class Render {
   constructor(board, placeholder) {
     this.logicalBoard = board;
@@ -13,12 +15,18 @@ class Render {
       for (let j in this.logicalBoard.matrix[i]) {
         const square = document.createElement("button");
         square.classList = "square";
-        if (this.logicalBoard.getContent(i, j) >=0) {
+
+        const squareContent = this.logicalBoard.getContent(i, j);
+        if (squareContent > squareState.Invisible) {
           square.classList += " visible";
-          square.innerText = this.logicalBoard.getContent(i, j);
+          square.innerText = squareContent;
         } else {
           square.classList += " invisible";
-          square.addEventListener("click", ()=>this.logicalBoard.select(i, j));
+          square.oncontextmenu = ()=> false;
+          square.addEventListener("mousedown", (e)=>this.logicalBoard.click(e, i, j));
+          if (squareContent === squareState.Flag) {
+            square.innerHTML = '<img src="./img/flag.png">';
+          }
         }
         row.appendChild(square);
       }
