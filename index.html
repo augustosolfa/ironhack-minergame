@@ -12,14 +12,8 @@
 
   </div>
   <script type="module">
-    import { Board } from './src/board.js';
-    import { Render } from './src/render.js';
-    import { Input } from './src/input.js';
-    const board = new Board(5, 5, 3);
-    console.log(board.squares);
-    const input = new Input(board);
-    const render = new Render(board, input);
-    placeholder.appendChild(render.renderize())
+    import { boardCreator } from './src/board/boardcreator.js';
+    boardCreator("placeholder", 5, 5, 3);
   </script>
 </body>
 </html>
