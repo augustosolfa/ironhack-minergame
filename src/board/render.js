@@ -19,10 +19,14 @@ class Render {
         const squareContent = this.logicalBoard.getContent(i, j);
         if (squareContent > squareState.Invisible) {
           square.classList += " visible";
-          if (squareContent === squareState.Bomb) {
-            square.innerHTML = '<img src="./img/bomb.png">';
-          } else {
-            square.innerText = squareContent;
+          switch(squareContent) {
+            case squareState.Bomb:
+              square.innerHTML = '<img src="./img/bomb.png">';
+              break;
+            case squareState.Empty:
+              break;
+            default:
+              square.innerText = squareContent;
           }
         } else {
           square.classList += " invisible";

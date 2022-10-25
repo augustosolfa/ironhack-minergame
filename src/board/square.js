@@ -1,6 +1,7 @@
 const squareState = {
   Flag: -2,
   Invisible: -1,
+  Empty: 0,
   Bomb: 9,
 }
 
