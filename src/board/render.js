@@ -36,9 +36,22 @@ class Render {
       }
       root.appendChild(row);
     }
-
+    
     this.placeholder.removeChild(this.placeholder.lastChild);
     this.placeholder.appendChild(root);
+
+    if (this.logicalBoard.bombExploded) {
+      this.message("You lose, loser!");
+    }
+    if (this.logicalBoard.playerWon) {
+      this.message("You won, this time...");
+    }
+  }
+  
+  message(text) {
+    const paragraph = document.createElement("p");
+    paragraph.innerText = text;
+    this.placeholder.appendChild(paragraph);
   }
 }
 
