@@ -1,0 +1,28 @@
+.row {
+  display: flex;
+  margin: 0;
+}
+
+.square {
+  width: 2em;
+  height: 2em;
+  border-radius: 3px;
+  margin: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.square.invisible {
+  background-color: gray;
+  box-shadow: 2px 2px black;
+}
+
+.square.visible {
+  background-color: lightgray;
+}
+
+.square img {
+  width: 1.5em;
+  height: 1.5em;
+}

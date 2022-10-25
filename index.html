@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Augusto Solfa - Projec1</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="placeholder">
+
+  </div>
+  <script type="module">
+    import { Board } from './src/board.js';
+    import { Render } from './src/render.js';
+    import { Input } from './src/input.js';
+    const board = new Board(5, 5, 3);
+    console.log(board.squares);
+    const input = new Input(board);
+    const render = new Render(board, input);
+    placeholder.appendChild(render.renderize())
+  </script>
+</body>
+</html>
