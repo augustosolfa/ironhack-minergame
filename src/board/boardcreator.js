@@ -37,6 +37,7 @@ function addBombs(board, bombs) {
       coordinates.push([i, j]);
     }
   }
+  coordinates.sort(()=> 0.5 - Math.random());
   bombs = bombs <= coordinates.length ? bombs : coordinates.length;
   for (let h = 0; h < bombs; h++) {
     const i = coordinates[h][0];

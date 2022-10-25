@@ -19,7 +19,11 @@ class Render {
         const squareContent = this.logicalBoard.getContent(i, j);
         if (squareContent > squareState.Invisible) {
           square.classList += " visible";
-          square.innerText = squareContent;
+          if (squareContent === squareState.Bomb) {
+            square.innerHTML = '<img src="./img/bomb.png">';
+          } else {
+            square.innerText = squareContent;
+          }
         } else {
           square.classList += " invisible";
           square.oncontextmenu = ()=> false;
