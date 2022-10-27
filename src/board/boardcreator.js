@@ -1,8 +1,7 @@
 import { Board } from "./board.js";
 import { Square } from "./square.js";
 
-function boardCreator(placeholderId, width, height, bombs) {
-  const placeholder = document.getElementById(placeholderId);
+function boardCreator(placeholder, width, height, bombs) {
   switch (arguments.length) {
     case 0:
       throw new Error("É necessário fornecer o Id do elemento root.");

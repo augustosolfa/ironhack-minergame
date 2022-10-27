@@ -8,7 +8,7 @@ class Render {
 
   renderize() {
     const root = document.createElement("div");
-    root.classList = "board";
+    root.id = "board";
     for (let i in this.logicalBoard.matrix) {
       const row = document.createElement("div");
       row.classList = "row";
@@ -45,17 +45,17 @@ class Render {
     this.placeholder.appendChild(root);
 
     if (this.logicalBoard.bombExploded) {
-      this.message("You lose, loser!");
+      this.message("You lose, loser!", root);
     }
     if (this.logicalBoard.playerWon) {
-      this.message("You won, this time...");
+      this.message("You won, this time...", root);
     }
   }
   
-  message(text) {
+  message(text, afterNode) {
     const paragraph = document.createElement("p");
     paragraph.innerText = text;
-    this.placeholder.appendChild(paragraph);
+    this.placeholder.insertBefore(paragraph, afterNode);
   }
 }
 

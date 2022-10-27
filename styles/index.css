@@ -1,0 +1,19 @@
+@import "page.css";
+@import "game.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+body {
+  font-size: calc(20px + 1vw);
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 5vw;
+  }
+}
