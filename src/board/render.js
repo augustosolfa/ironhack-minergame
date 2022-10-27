@@ -21,7 +21,7 @@ class Render {
           square.classList += " visible";
           switch(squareContent) {
             case squareState.Bomb:
-              square.innerHTML = '<img src="./img/bomb.png">';
+              square.innerHTML = '<img src="./img/bomb.svg">';
               break;
             case squareState.Empty:
               break;
@@ -33,7 +33,7 @@ class Render {
           square.oncontextmenu = ()=> false;
           square.addEventListener("mousedown", (e)=>this.logicalBoard.click(e, i, j));
           if (squareContent === squareState.Flag) {
-            square.innerHTML = '<img src="./img/flag.png">';
+            square.innerHTML = '<img src="./img/flag.svg">';
           }
         }
         row.appendChild(square);
