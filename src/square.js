@@ -12,6 +12,16 @@ class Square {
     this.neighborhood = [];
     this.x = x;
     this.y = y;
+    this.observers = [];
+  }
+
+  getSensorLecture() {
+    if (this.hasBomb) {
+      return 9;
+    }
+    return this.neighborhood.reduce(
+      (bombs, square) => square.hasBomb ? bombs++ : false,
+      0);
   }
 
   reveal() {
@@ -19,13 +29,12 @@ class Square {
       return;
     }
     this.state = State.Revealed;
-    this.revealNeighborhood()
+    this.updateObservers();
+    this.revealNeighborhood();
   }
 
   revealNeighborhood() {
-    for (let i in this.neighborhood) {
-      this.neighborhood[i].reveal();
-    }
+    this.neighborhood.forEach(square => square.reveal());
   }
 
   addNeighbor(square) {
@@ -36,6 +45,14 @@ class Square {
 
   addBomb() {
     this.hasBomb = true;
+  }
+
+  subscribe(observer) {
+    this.observers.push(observer);
+  }
+
+  updateObservers() {
+    this.observers.forEach(observer => observer.update(this));
   }
 }
 

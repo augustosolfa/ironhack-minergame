@@ -3,6 +3,8 @@ import { Square, State } from "./square.js";
 class Board {
   constructor(squares) {
     this.squares = squares;
+    this.subscribeSquares();
+    this.observers = [];
   }
 
   getGameState() {
@@ -25,6 +27,18 @@ class Board {
         !bombExploded && this.squares.length - (revealeds + bombs) === 0,
       playerLost: bombExploded,
     };
+  }
+
+  updateObservers() {
+    this.observers.forEach(observer => observer.update(this));
+  }
+  
+  subscribe(observer) {
+    this.observers.push(observer);
+  }
+
+  subscribeSquares() {
+    this.squares.forEach(square => square.subscribe(this));
   }
 }
 
