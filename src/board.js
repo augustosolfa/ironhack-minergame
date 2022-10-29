@@ -38,7 +38,13 @@ class Board {
   }
 
   subscribeSquares() {
-    this.squares.forEach(square => square.subscribe(this));
+    this.squares.forEach(column => 
+      column.forEach(
+      square => square.subscribe(this)));
+  }
+
+  update() {
+    this.updateObservers();
   }
 }
 

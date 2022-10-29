@@ -20,8 +20,9 @@ class Square {
       return 9;
     }
     return this.neighborhood.reduce(
-      (bombs, square) => square.hasBomb ? bombs++ : false,
-      0);
+      (bombs, square) => (square.hasBomb ? bombs + 1 : bombs),
+      0
+    );
   }
 
   reveal() {
@@ -30,11 +31,50 @@ class Square {
     }
     this.state = State.Revealed;
     this.updateObservers();
-    this.revealNeighborhood();
+    if (this.getSensorLecture() === 0) {
+      this.revealNeighborhood();
+    }
   }
 
   revealNeighborhood() {
-    this.neighborhood.forEach(square => square.reveal());
+    this.neighborhood.forEach((square) => square.reveal());
+  }
+
+  mark() {
+    if (this.state == State.Revealed) {
+      return;
+    }
+    switch (this.state) {
+      case State.Unmarked:
+        this.state = State.Flagged;
+        break;
+      case State.Flagged:
+        this.state = State.Doubt;
+        break;
+      case State.Doubt:
+        this.state = State.Unmarked;
+        break;
+    }
+    this.updateObservers();
+  }
+
+  revealIfObvious() {
+    if (this.state !== State.Revealed) {
+      return;
+    }
+
+    const neighborStatistics = [];
+    neighborStatistics[State.Revealed] = 0;
+    neighborStatistics[State.Unmarked] = 0;
+    neighborStatistics[State.Flagged] = 0;
+    neighborStatistics[State.Doubt] = 0;
+
+    this.neighborhood.forEach(
+      (neighbor) => neighborStatistics[neighbor.state]++
+    );
+    if (!neighborStatistics[State.Doubt] && neighborStatistics[State.Flagged] === this.getSensorLecture()) {
+      this.revealNeighborhood();
+    }
   }
 
   addNeighbor(square) {
@@ -52,8 +92,8 @@ class Square {
   }
 
   updateObservers() {
-    this.observers.forEach(observer => observer.update(this));
+    this.observers.forEach((observer) => observer.update(this));
   }
 }
 
-export { Square, State }
+export { Square, State };

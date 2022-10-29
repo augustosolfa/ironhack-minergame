@@ -63,3 +63,5 @@ function addNeighborhood(squares, width, height) {
     }
   }
 }
+
+export { boardGenerator };

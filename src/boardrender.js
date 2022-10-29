@@ -7,6 +7,10 @@ class BoardRender {
     this.update(board);
   }
 
+  update(board) {
+
+  }
+
   createRoot(board) {
     const root = document.createElement('div');
     root.id = "board";
@@ -18,5 +22,9 @@ class BoardRender {
         column.append(squareRender.root);
       }
     }
+
+    return root;
   }
 }
+
+export { BoardRender };
