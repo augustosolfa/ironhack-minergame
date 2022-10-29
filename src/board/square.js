@@ -1,62 +1,42 @@
-const squareState = {
-  Flag: -2,
-  Invisible: -1,
-  Empty: 0,
-  Bomb: 9,
-}
-
+const State = {
+  Revealed: 0,
+  Unmarked: 1,
+  Flagged: 2,
+  Doubt: 3,
+};
 
 class Square {
-  constructor() {
+  constructor(x, y) {
     this.hasBomb = false;
-    this.visible = false;
-    this.flag = false;
+    this.state = State.Unmarked;
     this.neighborhood = [];
+    this.x = x;
+    this.y = y;
   }
 
-  getContent() {
-    if (!this.visible) {
-      return this.flag ? squareState.Flag : squareState.Invisible;
-    }
-    if (this.hasBomb) {
-      return 9;
-    }
-      let bombsDetected = 0;
-      for (let i in this.neighborhood) {
-        if (this.neighborhood[i].hasBomb) {
-          bombsDetected++;
-        }
-      }
-      return bombsDetected;
-    
-  }
-
-  toggleFlag() {
-    this.flag = !this.flag;
-  }
-
-  select() {
-    if (this.visible || this.flag) {
+  reveal() {
+    if (this.state !== State.Unmarked) {
       return;
     }
-    this.visible = true;
-    if (this.getContent() === 0) {
-      for (let i in this.neighborhood) {
-        const neighbor = this.neighborhood[i];
-        if (!neighbor.visible) {
-          neighbor.select();
-        }
-      }
+    this.state = State.Revealed;
+    this.revealNeighborhood()
+  }
+
+  revealNeighborhood() {
+    for (let i in this.neighborhood) {
+      this.neighborhood[i].reveal();
+    }
+  }
+
+  addNeighbor(square) {
+    if (square instanceof Square) {
+      this.neighborhood.push(square);
     }
   }
 
   addBomb() {
     this.hasBomb = true;
   }
-
-  addNeighbor(square) {
-    this.neighborhood.push(square);
-  }
 }
 
-export { Square, squareState };
+export { Square, State }

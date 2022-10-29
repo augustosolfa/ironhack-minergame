@@ -1,48 +1,30 @@
-import { Square, squareState } from './square.js';
-import { Render } from './render.js';
+import { Square, State } from "./square.js";
 
 class Board {
-  constructor(placeholder, matrix) {
-    this.matrix = matrix;
-    this.bombExploded = false;
-    this.playerWon = false;
-    this.render = new Render(this, placeholder);
-    this.renderize();
+  constructor(squares) {
+    this.squares = squares;
   }
 
-  getContent(x, y) {
-    return this.matrix[x][y].getContent();
-  }
-
-  click(e, x, y) {
-    if (this.bombExploded || this.playerWon) {
-      return;
+  getGameState() {
+    let flaggeds = 0;
+    let bombs = 0;
+    let revealeds = 0;
+    let bombExploded = false;
+    for (let i in this.squares) {
+      this.squares[i].state === State.Flagged ? flaggeds++ : false;
+      this.squares[i].hasBomb ? bombs++ : false;
+      this.squares[i].state === State.Revealed ? revealeds++ : false;
+      this.squares[i].state === State.Revealed && this.squares[i].hasBomb
+        ? (bombExploded = true)
+        : false;
     }
-    const target = this.matrix[x][y];
-    if (e.button === 2) {
-      target.toggleFlag();
-    } else {
-      target.select();
-      this.bombExploded = target.getContent() === squareState.Bomb;
-    }
-    this.playerWon = this.checkPlayerWin();
-    console.log(this);
-    this.renderize();
-  }
 
-  renderize() {
-    this.render.renderize();
-  }
-
-  checkPlayerWin() {
-    return !this.matrix.reduce((remainSquare, row)=>{
-      return remainSquare || row.reduce((remainSquare, square)=>{
-        return remainSquare || !(square.visible || square.hasBomb)
-      },
-      false
-      )
-    }, false
-    );
+    return {
+      unmarkedBombs: bombs - flaggeds,
+      playerWon:
+        !bombExploded && this.squares.length - (revealeds + bombs) === 0,
+      playerLost: bombExploded,
+    };
   }
 }
 
