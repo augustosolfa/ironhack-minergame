@@ -1,16 +1,16 @@
-header {
+body > header {
   display: flex;
   flex-direction: column;
 }
 
-header h1 {
+body > header h1 {
   color: red;
   text-transform: uppercase;
   font-size: calc(80px + 10vw);
   text-align: center;
 }
 
-#placeholder {
+main {
   display: flex;
   flex-direction: column;
   align-items: center;

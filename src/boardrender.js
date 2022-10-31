@@ -3,12 +3,6 @@ import { SquareRender } from './squarerender.js';
 class BoardRender {
   constructor(board) {
     this.root = this.createRoot(board);
-    board.subscribe(this);
-    this.update(board);
-  }
-
-  update(board) {
-
   }
 
   createRoot(board) {

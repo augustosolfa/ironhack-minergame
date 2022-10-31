@@ -1,12 +1,22 @@
 import { Board } from "./board.js";
 import { Square } from "./square.js";
+import { BoardRender } from "./boardrender.js";
 
 function boardGenerator(width, height, numberOfBombs) {
   const squares = createSquares(width, height);
   addBombs(squares, numberOfBombs);
   addNeighborhood(squares, width, height);
 
-  return new Board(squares);
+  const board = new Board(squares);
+  const gameNode = document.getElementById('game');
+  const boardNodeOld = document.getElementById("board");
+  if (boardNodeOld) {
+    gameNode.removeChild(boardNodeOld);
+  }
+  const boardRender = new BoardRender(board);
+  
+  gameNode.appendChild(boardRender.root);
+
 }
 
 function createSquares(width, height) {

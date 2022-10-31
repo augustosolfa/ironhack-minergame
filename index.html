@@ -11,9 +11,21 @@
   <header>
     <h1>Miner</h1>
   </header>
-  <main id="game">
-    <div id="start-screen">
-    </div>
+  <main>
+    <section id="level">
+      <p>Select your game level:</p>
+      <div>
+        <button class="novice">Novice</button>
+        <button class="normal">Normal</button>
+        <button class="hard">Hard</button>
+      </div>
+    </section>
+    <section id="game" class="hide">
+      <header id="score">
+        <p id="bombs-remaining">99</p>
+        <p id="chronometer">00:00:00</p>
+      </header>
+    </section>
   </main>
   <script src="./src/index.js" type="module"></script>
 </body>

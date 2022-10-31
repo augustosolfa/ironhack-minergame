@@ -20,7 +20,8 @@ class SquareRender {
     let innerHTML = "";
 
     if (square.state === State.Revealed && !square.hasBomb) {
-      innerHTML = `<span>${square.getSensorLecture()}</span>`;
+      const lecture = square.getSensorLecture();
+      innerHTML = `<span>${lecture > 0 ? lecture : ""}</span>`;
     }
     if (square.state === State.Revealed && square.hasBomb) {
       innerHTML = `<img src="./img/explosion.svg" alt="explosion">`;
