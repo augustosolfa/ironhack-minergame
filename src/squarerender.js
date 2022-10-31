@@ -4,7 +4,6 @@ class SquareRender {
   constructor(square) {
     this.square = square;
     this.root = document.createElement("div");
-    this.root.classList.add("square");
     this.addEventListeners();
     square.subscribe(this);
     this.update(square);
@@ -12,6 +11,12 @@ class SquareRender {
 
   update(square) {
     this.clear();
+    
+    let classes = "square ";
+    square.state === State.Revealed ? classes += "revealed" : classes += "unrevealed";
+    this.root.classList = classes;
+
+
     let innerHTML = "";
 
     if (square.state === State.Revealed && !square.hasBomb) {

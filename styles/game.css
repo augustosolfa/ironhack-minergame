@@ -11,6 +11,16 @@
   justify-content: center;
 }
 
+#board .revealed {
+  border-style: inset;
+  border-width: 0.2em;
+}
+
+#board .unrevealed {
+  border-style: outset;
+  border-width: 0.3em;
+}
+
 #board img {
   width: 90%;
   height: 90%;
