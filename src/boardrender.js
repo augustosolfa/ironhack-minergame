@@ -3,6 +3,7 @@ import { SquareRender } from './squarerender.js';
 class BoardRender {
   constructor(board) {
     this.root = this.createRoot(board);
+    board.subscribe(this);
   }
 
   createRoot(board) {
@@ -18,6 +19,13 @@ class BoardRender {
     }
 
     return root;
+  }
+
+  update(board) {
+    const gameState = board.getGameState();
+    if (gameState.playerWon || gameState.playerLose) {
+      this.root.classList.add("ended");
+    }
   }
 }
 

@@ -1,5 +1,6 @@
 import { Board } from "./board.js";
 import { Square } from "./square.js";
+import { ScoreRender } from "./scorerender.js";
 import { BoardRender } from "./boardrender.js";
 
 function boardGenerator(width, height, numberOfBombs) {
@@ -7,12 +8,13 @@ function boardGenerator(width, height, numberOfBombs) {
   addBombs(squares, numberOfBombs);
   addNeighborhood(squares, width, height);
 
-  const board = new Board(squares);
+  const board = new Board(squares, width, height);
   const gameNode = document.getElementById('game');
   const boardNodeOld = document.getElementById("board");
   if (boardNodeOld) {
     gameNode.removeChild(boardNodeOld);
   }
+  const scoreRender = new ScoreRender(board);
   const boardRender = new BoardRender(board);
   
   gameNode.appendChild(boardRender.root);

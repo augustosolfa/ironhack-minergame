@@ -1,10 +1,16 @@
 import { Square, State } from "./square.js";
 
 class Board {
-  constructor(squares) {
+  constructor(squares, width, height) {
     this.squares = squares;
+    this.width = width;
+    this.height = height;
     this.subscribeSquares();
     this.observers = [];
+    this.timerInSeconds = -2;
+    this.timerId = null;
+
+    this.updateObservers();
   }
 
   getGameState() {
@@ -13,38 +19,56 @@ class Board {
     let revealeds = 0;
     let bombExploded = false;
     for (let i in this.squares) {
-      this.squares[i].state === State.Flagged ? flaggeds++ : false;
-      this.squares[i].hasBomb ? bombs++ : false;
-      this.squares[i].state === State.Revealed ? revealeds++ : false;
-      this.squares[i].state === State.Revealed && this.squares[i].hasBomb
-        ? (bombExploded = true)
-        : false;
+      for (let j in this.squares[i]) {
+        const square = this.squares[i][j];
+        square.state === State.Flagged ? flaggeds++ : false;
+        square.hasBomb ? bombs++ : false;
+        square.state === State.Revealed ? revealeds++ : false;
+        square.state === State.Revealed && square.hasBomb
+          ? (bombExploded = true)
+          : false;
+      }
+    }
+
+    const playerWon =
+      !bombExploded && this.width * this.height - (revealeds + bombs) === 0;
+    const playerLose = bombExploded;
+
+    if (playerWon || playerLose) {
+      clearInterval(this.timerId);
     }
 
     return {
       unmarkedBombs: bombs - flaggeds,
-      playerWon:
-        !bombExploded && this.squares.length - (revealeds + bombs) === 0,
-      playerLost: bombExploded,
+      playerWon: playerWon,
+      playerLose: playerLose,
+      timer: this.timerInSeconds,
     };
   }
 
   updateObservers() {
-    this.observers.forEach(observer => observer.update(this));
+    this.observers.forEach((observer) => observer.update(this));
   }
-  
+
   subscribe(observer) {
     this.observers.push(observer);
   }
 
   subscribeSquares() {
-    this.squares.forEach(column => 
-      column.forEach(
-      square => square.subscribe(this)));
+    this.squares.forEach((column) =>
+      column.forEach((square) => square.subscribe(this))
+    );
   }
 
-  update() {
+  update(subject) {
     this.updateObservers();
+    if (this.timerInSeconds < -1) {
+      this.timerInSeconds++;
+      this.timerId = setInterval(() => {
+        this.timerInSeconds++;
+        this.updateObservers();
+      }, 1000);
+    }
   }
 }
 
