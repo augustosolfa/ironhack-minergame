@@ -73,6 +73,17 @@
   box-shadow: 12px 12px 24px #c2c2c2, -12px -12px 24px #ffffff;
 }
 
+#state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#state img {
+  width: 1.2em;
+  height: 1.2em;
+}
+
 #board {
   display: flex;
   gap: 0.2em;

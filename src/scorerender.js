@@ -15,13 +15,13 @@ class ScoreRender {
 
     const gameStateDom = document.getElementById("state");
     if(!(gameState.playerWon||gameState.playerLose)){
-      gameStateDom.innerText="";
+      gameStateDom.innerHTML="";
     }
     if(gameState.playerWon) {
-      gameStateDom.innerText = "You won!";
+      gameStateDom.innerHTML = '<img src="./img/emoji-sunglasses.svg">';
     }
     if(gameState.playerLose) {
-      gameStateDom.innerText = "You lose!";
+      gameStateDom.innerHTML = '<img src="./img/emoji-dizzy.svg">';
     }
   }
 
