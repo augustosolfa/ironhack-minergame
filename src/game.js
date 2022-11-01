@@ -3,16 +3,17 @@ import { BoardRender } from "./boardrender.js";
 
 class Game {
   constructor() {
+    this.board = null;
     this.addLevelEventListners();
   }
 
   addLevelEventListners() {
     const btnNovice = document.querySelector("#level .novice");
-    btnNovice.addEventListener("click", () => this.newBoard(5, 5, 3));
+    btnNovice.addEventListener("click", () => this.newBoard(9, 9, 10));
     const btnNormal = document.querySelector("#level .normal");
-    btnNormal.addEventListener("click", () => this.newBoard(15, 15, 30));
+    btnNormal.addEventListener("click", () => this.newBoard(16, 16, 40));
     const btnHard = document.querySelector("#level .hard");
-    btnHard.addEventListener("click", () => this.newBoard(30, 30, 99));
+    btnHard.addEventListener("click", () => this.newBoard(16, 30, 99));
 
     const btnRestart = document.getElementById("restart");
     btnRestart.addEventListener("click", () => {
@@ -21,7 +22,7 @@ class Game {
   }
 
   newBoard(width, height, numberOfBombs) {
-    const board = new boardGenerator(width, height, numberOfBombs);
+    this.board = new boardGenerator(width, height, numberOfBombs);
     const levelSection = document.getElementById("level");
     levelSection.classList.add("hide");
     const gameSection = document.getElementById("game");

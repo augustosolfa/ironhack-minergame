@@ -11,11 +11,12 @@ class SquareRender {
 
   update(square) {
     this.clear();
-    
-    let classes = "square ";
-    square.state === State.Revealed ? classes += "revealed" : classes += "unrevealed";
-    this.root.classList = classes;
 
+    let classes = "square ";
+    square.state === State.Revealed
+      ? (classes += "revealed")
+      : (classes += "unrevealed");
+    this.root.classList = classes;
 
     let innerHTML = "";
 
