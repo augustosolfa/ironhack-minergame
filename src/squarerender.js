@@ -24,13 +24,13 @@ class SquareRender {
       innerHTML = `<span>${lecture > 0 ? lecture : ""}</span>`;
     }
     if (square.state === State.Revealed && square.hasBomb) {
-      innerHTML = `<img src="./img/explosion.svg" alt="explosion">`;
+      innerHTML = `<img src="./img/egg-fried.svg" alt="explosion">`;
     }
     if (square.state === State.Flagged) {
-      innerHTML = `<img src="./img/flag.svg" alt="flagged">`;
+      innerHTML = `<img src="./img/flag-fill.svg" alt="flagged">`;
     }
     if (square.state === State.Doubt) {
-      innerHTML = `<img src="./img/doubt.png" alt="doubt">`;
+      innerHTML = `<img src="./img/question-lg.svg" alt="doubt">`;
     }
 
     this.root.innerHTML = innerHTML;

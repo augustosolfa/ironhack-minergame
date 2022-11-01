@@ -14,6 +14,9 @@ class ScoreRender {
     timer.innerText = this.formatTimer(gameState.timer);
 
     const gameStateDom = document.getElementById("state");
+    if(!(gameState.playerWon||gameState.playerLose)){
+      gameStateDom.innerText="";
+    }
     if(gameState.playerWon) {
       gameStateDom.innerText = "You won!";
     }

@@ -16,6 +16,7 @@
   display: flex;
   gap: 1em;
   flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 #level button {
@@ -49,6 +50,18 @@
   display: none;
 }
 
+#game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#restart img {
+  width: 1.5em;
+  height: 1.5em;
+  margin-bottom: 0.5em;
+}
+
 #score {
   display: flex;
   justify-content: space-around;
@@ -62,6 +75,13 @@
 
 #board {
   display: flex;
+  gap: 0.2em;
+}
+
+#board > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
 }
 
 #board.ended {
@@ -71,7 +91,7 @@
 #board .square {
   width: 1.5em;
   height: 1.5em;
-  background-color: gray;
+  border-radius: 0.3em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,16 +99,16 @@
 }
 
 #board .revealed {
+  background-color: #e0e0e0;
   border-style: inset;
-  border-width: 0.2em;
 }
 
 #board .unrevealed {
+  background-color: white;
   border-style: outset;
-  border-width: 0.2em;
 }
 
 #board img {
-  width: 90%;
-  height: 90%;
+  width: 80%;
+  height: 80%;
 }
