@@ -16,9 +16,6 @@ class Square {
   }
 
   getSensorLecture() {
-    if (this.hasBomb) {
-      return 9;
-    }
     return this.neighborhood.reduce(
       (bombs, square) => (square.hasBomb ? bombs + 1 : bombs),
       0
@@ -72,7 +69,10 @@ class Square {
     this.neighborhood.forEach(
       (neighbor) => neighborStatistics[neighbor.state]++
     );
-    if (!neighborStatistics[State.Doubt] && neighborStatistics[State.Flagged] === this.getSensorLecture()) {
+    if (
+      !neighborStatistics[State.Doubt] &&
+      neighborStatistics[State.Flagged] === this.getSensorLecture()
+    ) {
       this.revealNeighborhood();
     }
   }
