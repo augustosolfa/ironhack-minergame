@@ -69,13 +69,13 @@
   box-shadow: 12px 12px 24px #c2c2c2, -12px -12px 24px #ffffff;
 }
 
-#state {
+#score .state {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#state img {
+#score .state img {
   width: 1.2em;
   height: 1.2em;
 }
