@@ -14,7 +14,6 @@ function boardGenerator(width, height, numberOfBombs) {
   if (boardNodeOld) {
     gameNode.removeChild(boardNodeOld);
   }
-  const scoreRender = new ScoreRender(board);
   const boardRender = new BoardRender(board);
   
   gameNode.appendChild(boardRender.root);

@@ -1,9 +1,10 @@
 import { SquareRender } from './squarerender.js';
+import { Score } from './score.js';
 
 class BoardRender {
   constructor(board) {
     this.root = this.createRoot(board);
-    board.subscribe(this);
+    board.score.addObserver(this);
   }
 
   createRoot(board) {
@@ -21,9 +22,8 @@ class BoardRender {
     return root;
   }
 
-  update(board) {
-    const gameState = board.getGameState();
-    if (gameState.playerWon || gameState.playerLose) {
+  update(subject) {
+    if (subject instanceof Score && subject.playerWon || subject.playerLose) {
       this.root.classList.add("ended");
     }
   }

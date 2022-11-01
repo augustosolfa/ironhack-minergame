@@ -1,33 +1,51 @@
 class ScoreRender {
-  constructor(board) {
-    board.subscribe(this);
-    this.update(board);
+  constructor(score) {
+    this.node = document.getElementById("score");
+    this.populateNode();
+    this.unmarkedBombs = this.node.querySelector(".unmarked-bombs");
+    this.timer = this.node.querySelector(".timer");
+    this.state = this.node.querySelector(".state");
+    score.addObserver(this);
+    this.update(score);
   }
 
-  update(board) {
-    const gameState = board.getGameState();
-    
-    const unmarkedBombs = document.getElementById("unmarked-bombs");
-    unmarkedBombs.innerText = gameState.unmarkedBombs;
+  update(score) {
+    this.unmarkedBombs.innerText = score.unmarkedBombs;
 
-    const timer = document.getElementById("timer");
-    timer.innerText = this.formatTimer(gameState.timer);
+    this.timer.innerText = this.formatTimer(score.timerInSeconds);
 
-    const gameStateDom = document.getElementById("state");
-    if(!(gameState.playerWon||gameState.playerLose)){
-      gameStateDom.innerHTML="";
+    if (!(score.playerWon || score.playerLose)) {
+      this.state.innerHTML = "";
     }
-    if(gameState.playerWon) {
-      gameStateDom.innerHTML = '<img src="./img/emoji-sunglasses.svg">';
+    if (score.playerWon) {
+      this.state.innerHTML = '<img src="./img/emoji-sunglasses.svg">';
     }
-    if(gameState.playerLose) {
-      gameStateDom.innerHTML = '<img src="./img/emoji-dizzy.svg">';
+    if (score.playerLose) {
+      this.state.innerHTML = '<img src="./img/emoji-dizzy.svg">';
     }
+  }
+
+  populateNode() {
+    while (this.node.hasChildNodes()) {
+      this.node.removeChild(this.node.lastChild);
+    }
+    const unmarkedBombs = document.createElement('p');
+    unmarkedBombs.classList.add("unmarked-bombs");
+    this.node.appendChild(unmarkedBombs);
+    const state = document.createElement('div');
+    state.classList.add("state");
+    this.node.appendChild(state);
+    const timer = document.createElement('p');
+    timer.classList.add("timer");
+    this.node.appendChild(timer);
   }
 
   formatTimer(numberOfSeconds) {
     numberOfSeconds = numberOfSeconds >= 0 ? numberOfSeconds : 0;
-    return `${ Math.floor(numberOfSeconds / 60) }:${ ("0" + (numberOfSeconds % 60)).slice(-2, 3) }`
+    return `${Math.floor(numberOfSeconds / 60)}:${(
+      "0" +
+      (numberOfSeconds % 60)
+    ).slice(-2, 3)}`;
   }
 }
 
