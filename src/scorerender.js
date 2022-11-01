@@ -11,7 +11,7 @@ class ScoreRender {
     unmarkedBombs.innerText = gameState.unmarkedBombs;
 
     const timer = document.getElementById("timer");
-    timer.innerText = gameState.timer >= 0 ? gameState.timer : 0;
+    timer.innerText = this.formatTimer(gameState.timer);
 
     const gameStateDom = document.getElementById("state");
     if(gameState.playerWon) {
@@ -20,6 +20,11 @@ class ScoreRender {
     if(gameState.playerLose) {
       gameStateDom.innerText = "You lose!";
     }
+  }
+
+  formatTimer(numberOfSeconds) {
+    numberOfSeconds = numberOfSeconds >= 0 ? numberOfSeconds : 0;
+    return `${ Math.floor(numberOfSeconds / 60) }:${ ("0" + (numberOfSeconds % 60)).slice(-2, 3) }`
   }
 }
 
