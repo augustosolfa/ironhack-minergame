@@ -5,9 +5,16 @@ main {
   user-select: none;
 }
 
+#level h2 {
+  color: orange;
+  text-align: center;
+  position: relative;
+  top: 1em;
+}
+
 #level h1 {
   color: red;
   text-transform: uppercase;
-  font-size: 5em;
+  font-size: 4em;
   text-align: center;
 }
