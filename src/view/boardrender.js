@@ -1,4 +1,5 @@
 import { SquareRender } from './squarerender.js';
+import { endRender } from './endrender.js';
 
 class BoardRender {
   constructor(game) {
@@ -31,6 +32,7 @@ class BoardRender {
   update(gameState) {
     if (gameState.finished) {
       this.node.classList.add("ended");
+      endRender(this);
     }
   }
 }
