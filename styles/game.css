@@ -59,10 +59,11 @@
 }
 
 #score {
+  font-size: 27px;
   display: flex;
   justify-content: space-around;
   width: 100%;
-  margin-bottom: 1em;
+  margin: 1em 0;
   padding: 0.5em 0;
   border-radius: 50px;
   background: linear-gradient(145deg, #e6e6e6, #ffffff);

@@ -1,6 +1,7 @@
 import { Game } from '../model/game.js';
 import { BoardRender } from './boardrender.js';
 import { ScoreRender } from './scorerender.js';
+import { screenAdapt } from './style.js';
 
 class GameRender {
   constructor() {
@@ -31,6 +32,7 @@ class GameRender {
     const levelSection = document.getElementById("level");
     const gameSection = document.getElementById("game");
     levelSection.classList.add("hide");
+    screenAdapt(width, height);
     gameSection.classList.remove("hide");
   }
 
@@ -38,6 +40,7 @@ class GameRender {
     const game = document.getElementById("game");
     const level = document.getElementById("level");
     game.classList.add("hide");
+    screenAdapt();
     level.classList.remove("hide");
   }
 }

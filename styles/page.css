@@ -1,17 +1,12 @@
-body > header {
-  display: flex;
-  flex-direction: column;
-}
-
-body > header h1 {
-  color: red;
-  text-transform: uppercase;
-  font-size: calc(70px + 8vw);
-  text-align: center;
-}
-
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#level h1 {
+  color: red;
+  text-transform: uppercase;
+  font-size: 5em;
+  text-align: center;
 }
