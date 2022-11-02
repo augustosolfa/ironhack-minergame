@@ -1,52 +1,31 @@
 class ScoreRender {
-  constructor(score) {
-    this.node = document.getElementById("score");
-    this.populateNode();
-    this.unmarkedBombs = this.node.querySelector(".unmarked-bombs");
-    this.timer = this.node.querySelector(".timer");
-    this.state = this.node.querySelector(".state");
-    score.addObserver(this);
-    this.update(score);
+  constructor(game) {
+    this.unmarkedBombsNode = document.querySelector("#score .unmarked-bombs");
+    this.stateNode = document.querySelector("#score .state");
+    this.timerNode = document.querySelector("#score .timer");
+    game.addObserver(this);
   }
 
-  update(score) {
-    this.unmarkedBombs.innerText = score.unmarkedBombs;
+  update(gameState) {
+    this.unmarkedBombsNode.innerText = gameState.numberOfUnmarkedBombs;
+    this.timerNode.innerText = formatTimer(gameState.timerSeconds);
 
-    this.timer.innerText = this.formatTimer(score.timerInSeconds);
-
-    if (!(score.playerWon || score.playerLose)) {
-      this.state.innerHTML = "";
+    let stateImgSrc = "./img/emoji-smile.svg";
+    if (gameState.playerWon) {
+      stateImgSrc = "./img/emoji-sunglasses.svg";
     }
-    if (score.playerWon) {
-      this.state.innerHTML = '<img src="./img/emoji-sunglasses.svg">';
+    if (gameState.playerLose) {
+      stateImgSrc = "./img/emoji-dizzy.svg";
     }
-    if (score.playerLose) {
-      this.state.innerHTML = '<img src="./img/emoji-dizzy.svg">';
-    }
+    this.stateNode.innerHTML = `<img src="${stateImgSrc}">`
   }
 
-  populateNode() {
-    while (this.node.hasChildNodes()) {
-      this.node.removeChild(this.node.lastChild);
-    }
-    const unmarkedBombs = document.createElement('p');
-    unmarkedBombs.classList.add("unmarked-bombs");
-    this.node.appendChild(unmarkedBombs);
-    const state = document.createElement('div');
-    state.classList.add("state");
-    this.node.appendChild(state);
-    const timer = document.createElement('p');
-    timer.classList.add("timer");
-    this.node.appendChild(timer);
-  }
+}
 
-  formatTimer(numberOfSeconds) {
-    numberOfSeconds = numberOfSeconds >= 0 ? numberOfSeconds : 0;
-    return `${Math.floor(numberOfSeconds / 60)}:${(
-      "0" +
-      (numberOfSeconds % 60)
-    ).slice(-2, 3)}`;
-  }
+function formatTimer(timer) {
+  const minutes = Math.floor(timer / 60);
+  const seconds = ("0" + (timer % 60)).slice(-2,3);
+  return `${minutes}:${seconds}`;
 }
 
 export { ScoreRender };

@@ -1,39 +1,48 @@
-import { boardGenerator } from "./boardgenerator.js";
-import { BoardRender } from "./boardrender.js";
+import { Board } from "./board.js";
+import { GameState } from "./gamestate.js";
 
 class Game {
   constructor() {
     this.board = null;
-    this.addLevelEventListners();
+    this.timerId = null;
+    this.timerSeconds = 0;
+    this.observers = [];
   }
 
-  addLevelEventListners() {
-    const btnNovice = document.querySelector("#level .novice");
-    btnNovice.addEventListener("click", () => this.newBoard(9, 9, 10));
-    const btnNormal = document.querySelector("#level .normal");
-    btnNormal.addEventListener("click", () => this.newBoard(16, 16, 40));
-    const btnHard = document.querySelector("#level .hard");
-    btnHard.addEventListener("click", () => this.newBoard(16, 30, 99));
-
-    const btnRestart = document.getElementById("restart");
-    btnRestart.addEventListener("click", () => {
-      this.restart();
-    });
+  notifyObservers(gameState) {
+    this.observers.forEach((observer) => observer.update(gameState ?? new GameState(this)));
   }
 
-  newBoard(width, height, numberOfBombs) {
-    this.board = new boardGenerator(width, height, numberOfBombs);
-    const levelSection = document.getElementById("level");
-    levelSection.classList.add("hide");
-    const gameSection = document.getElementById("game");
-    gameSection.classList.remove("hide");
+  addObserver(observer) {
+    this.observers.push(observer);
   }
 
-  restart() {
-    const game = document.getElementById("game");
-    const level = document.getElementById("level");
-    game.classList.add("hide");
-    level.classList.remove("hide");
+  update() {
+    if (this.timerId === null) {
+      this.timerId = setInterval(() => {
+        this.timerSeconds++;
+        this.notifyObservers(new GameState(this));
+      },
+      1000);
+    }
+    const gameState = new GameState(this);
+    if (gameState.finished) {
+      this.resetTimer();
+    }
+    this.notifyObservers(gameState);
+  }
+
+  new(width, height, numberOfBombs) {
+    this.resetTimer();
+    this.board = new Board(this, width, height, numberOfBombs);
+  }
+
+  resetTimer() {
+    if (this.timerId !== null) {
+      clearInterval(this.timerId);
+      this.timerId = null;
+      this.timerSeconds = 0;
+    }
   }
 }
 

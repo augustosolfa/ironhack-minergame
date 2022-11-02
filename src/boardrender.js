@@ -1,30 +1,36 @@
 import { SquareRender } from './squarerender.js';
-import { Score } from './score.js';
 
 class BoardRender {
-  constructor(board) {
-    this.root = this.createRoot(board);
-    board.score.addObserver(this);
+  constructor(game) {
+    this.game = game;
+    this.node = document.createElement('div');
+    this.createNode();
+    game.addObserver(this);
   }
 
-  createRoot(board) {
-    const root = document.createElement('div');
-    root.id = "board";
-    for (let i in board.squares) {
+  createNode() {
+    const matrix = this.game.board.matrix
+    for (let i in matrix) {
       const column = document.createElement('div');
-      root.appendChild(column);
-      for (let j in board.squares[i]) {
-        const squareRender = new SquareRender(board.squares[i][j]);
+      this.node.appendChild(column);
+      for (let j in matrix[i]) {
+        const squareRender = new SquareRender(matrix[i][j]);
         column.append(squareRender.root);
       }
     }
-
-    return root;
+    
+    this.node.id = "board";
+    const gameNode = document.getElementById("game");
+    const oldBoardNode = gameNode.querySelector("#board");
+    if (oldBoardNode) {
+      gameNode.removeChild(oldBoardNode);
+    }
+    gameNode.appendChild(this.node);
   }
 
-  update(subject) {
-    if (subject instanceof Score && subject.playerWon || subject.playerLose) {
-      this.root.classList.add("ended");
+  update(gameState) {
+    if (gameState.finished) {
+      this.node.classList.add("ended");
     }
   }
 }

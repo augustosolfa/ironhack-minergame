@@ -5,7 +5,7 @@ class SquareRender {
     this.square = square;
     this.root = document.createElement("div");
     this.addEventListeners();
-    square.subscribe(this);
+    square.addObserver(this);
     this.update(square);
   }
 

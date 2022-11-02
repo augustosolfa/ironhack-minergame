@@ -6,12 +6,10 @@ const State = {
 };
 
 class Square {
-  constructor(x, y) {
+  constructor() {
     this.hasBomb = false;
     this.state = State.Unmarked;
     this.neighborhood = [];
-    this.x = x;
-    this.y = y;
     this.observers = [];
   }
 
@@ -87,7 +85,7 @@ class Square {
     this.hasBomb = true;
   }
 
-  subscribe(observer) {
+  addObserver(observer) {
     this.observers.push(observer);
   }
 

@@ -1,8 +1,8 @@
-import { Game } from './game.js';
+import { GameRender } from './gamerender.js';
 
 window.addEventListener(
   'load',
   () => {
-    const game = new Game();
+    const gameRender = new GameRender();
   }
 )
