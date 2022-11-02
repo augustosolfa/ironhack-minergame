@@ -44,6 +44,19 @@ class SquareRender {
   }
 
   addEventListeners() {
+    let touchTimer;
+    this.root.addEventListener("touchstart", (e) => touchTimer = e.timeStamp);
+    this.root.addEventListener("touchend",
+      (e) => {
+        e.preventDefault();
+        if (e.timeStamp - touchTimer < 1000) {
+          this.square.reveal();
+        } else {
+          this.square.mark();
+        }
+      }
+    );
+
     this.root.addEventListener("click", () => this.square.reveal());
     this.root.addEventListener("contextmenu", (e) => {
       e.preventDefault();
