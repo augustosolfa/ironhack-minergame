@@ -51,6 +51,7 @@
   flex-direction: column;
   align-items: center;
   user-select: none;
+  -webkit-user-select: none;
 }
 
 #restart img {
