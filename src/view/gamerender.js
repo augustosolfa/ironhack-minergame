@@ -1,4 +1,4 @@
-import { Game } from './game.js';
+import { Game } from '../model/game.js';
 import { BoardRender } from './boardrender.js';
 import { ScoreRender } from './scorerender.js';
 

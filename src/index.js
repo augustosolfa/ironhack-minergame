@@ -1,4 +1,4 @@
-import { GameRender } from './gamerender.js';
+import { GameRender } from './view/gamerender.js';
 
 window.addEventListener(
   'load',

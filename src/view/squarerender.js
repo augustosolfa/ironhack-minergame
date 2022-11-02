@@ -1,4 +1,4 @@
-import { Square, State } from "./square.js";
+import { Square, State } from "../model/square.js";
 
 class SquareRender {
   constructor(square) {
