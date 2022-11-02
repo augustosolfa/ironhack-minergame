@@ -32,9 +32,22 @@ class BoardRender {
   update(gameState) {
     if (gameState.finished) {
       this.node.classList.add("ended");
+      if (gameState.playerLose) {
+        playSound("./sound/egg-crack.mp3");
+      }
+      if (gameState.playerWon) {
+        playSound("./sound/rooster.mp3");
+      }
+      
       endRender(this);
     }
   }
+}
+
+function playSound(file) {
+  const eggCrack = new Audio(file);
+  eggCrack.loop = false;
+  eggCrack.play();
 }
 
 export { BoardRender };
