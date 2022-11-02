@@ -9,7 +9,6 @@ function showRanking() {
   const ranking = new Ranking().bestTimes;
 
   for (let level in ranking) {
-    console.log(level);
     const levelDiv = document.createElement("div");
     levelDiv.classList.add("level");
     root.appendChild(levelDiv);

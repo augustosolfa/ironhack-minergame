@@ -42,6 +42,11 @@
   border-color: red;
 }
 
+#level a {
+    text-decoration: none;
+    color: gray;
+}
+
 #game.hide {
   display: none;
 }
