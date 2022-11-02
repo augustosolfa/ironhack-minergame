@@ -20,11 +20,11 @@ class GameState {
     }
 
     this.numberOfUnmarkedBombs = bombs - flaggeds;
-    // this.timerSeconds = game.timerSeconds >= 0 ? game.timerSeconds : 0;
     this.timerSeconds = game.timerSeconds;
     this.playerLose = bombExploded;
     this.playerWon = !this.playerLose && revealeds + bombs === game.board.size;
     this.finished = this.playerLose || this.playerWon;
+    this.level = game.board.level;
   }
 }
 

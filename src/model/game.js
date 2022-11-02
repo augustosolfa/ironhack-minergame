@@ -38,9 +38,9 @@ class Game {
     this.notifyObservers(gameState);
   }
 
-  new(width, height, numberOfBombs) {
+  new(level) {
     this.resetTimer();
-    this.board = new Board(this, width, height, numberOfBombs);
+    this.board = new Board(this, level);
   }
 
   resetTimer() {

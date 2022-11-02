@@ -13,11 +13,14 @@ class GameRender {
 
   addLevelEventListners() {
     const btnNovice = document.querySelector("#level .novice");
-    btnNovice.addEventListener("click", () => this.newGame(9, 9, 10));
+    // btnNovice.addEventListener("click", () => this.newGame(9, 9, 10));
+    btnNovice.addEventListener("click", () => this.newGame("novice"));
     const btnNormal = document.querySelector("#level .normal");
-    btnNormal.addEventListener("click", () => this.newGame(16, 16, 40));
+    // btnNormal.addEventListener("click", () => this.newGame(16, 16, 40));
+    btnNormal.addEventListener("click", () => this.newGame("normal"));
     const btnHard = document.querySelector("#level .hard");
-    btnHard.addEventListener("click", () => this.newGame(16, 30, 99));
+    // btnHard.addEventListener("click", () => this.newGame(16, 30, 99));
+    btnHard.addEventListener("click", () => this.newGame("hard"));
 
     const btnRestart = document.querySelector("#score .state");
     btnRestart.addEventListener("click", () => {
@@ -25,15 +28,15 @@ class GameRender {
     });
   }
 
-  newGame(width, height, numberOfBombs) {
-    this.game.new(width, height, numberOfBombs);
+  newGame(level) {
+    this.game.new(level);
     this.game.removeObserver(this.boardRender);
     this.boardRender = new BoardRender(this.game);
     this.game.notifyObservers();
     const levelSection = document.getElementById("level");
     const gameSection = document.getElementById("game");
     levelSection.classList.add("hide");
-    screenAdapt(width, height);
+    screenAdapt(this.game.board.width, this.game.board.height);
     gameSection.classList.remove("hide");
   }
 

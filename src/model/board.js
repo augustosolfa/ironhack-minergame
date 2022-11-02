@@ -1,9 +1,12 @@
 import { Square } from "./square.js";
 
 class Board {
-  constructor(game, width, height, numberOfBombs) {
-    this.matrix = this.createGameMatrix(game, width, height, numberOfBombs);
-    this.size = width * height;
+  constructor(game, level) {
+    this.level = level;
+    this.width = null;
+    this.height = null;
+    this.matrix = this.createGameMatrix(game, level);
+    this.size = this.width * this.height;
     this.game = game;
   }
 
@@ -11,10 +14,28 @@ class Board {
     this.game.update();
   }
 
-  createGameMatrix(game, width, height, numberOfBombs) {
-    const matrix = createEmptyMatrix(game, width, height);
+  createGameMatrix(game, level) {
+    let numberOfBombs;
+    switch(level){
+      case "novice":
+        this.width = 9;
+        this.height = 9;
+        numberOfBombs = 10;
+        break;
+      case "normal":
+        this.width = 16;
+        this.height = 16;
+        numberOfBombs = 40;
+        break;
+      case "hard":
+        this.width = 20;
+        this.height = 24;
+        numberOfBombs = 99;
+        break;
+    }
+    const matrix = createEmptyMatrix(game, this.width, this.height);
     addBombsToMatrix(matrix, numberOfBombs);
-    addNeighborhood(matrix, width, height);
+    addNeighborhood(matrix, this.width, this.height);
     return matrix;
 
     function createEmptyMatrix(game, width, height) {

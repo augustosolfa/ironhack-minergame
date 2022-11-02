@@ -8,10 +8,3 @@ window.addEventListener(
     screenAdapt();
   }
 )
-
-// window.addEventListener(
-//   'resize',
-//   () => {
-//     screenAdapt();
-//   }
-// )

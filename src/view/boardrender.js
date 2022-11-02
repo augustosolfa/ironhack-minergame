@@ -1,5 +1,6 @@
 import { SquareRender } from './squarerender.js';
 import { endRender } from './endrender.js';
+import { Ranking } from '../model/ranking.js';
 
 class BoardRender {
   constructor(game) {
@@ -38,8 +39,8 @@ class BoardRender {
       if (gameState.playerWon) {
         playSound("./sound/rooster.mp3");
       }
-      
       endRender(this);
+      new Ranking().add(gameState);
     }
   }
 }
