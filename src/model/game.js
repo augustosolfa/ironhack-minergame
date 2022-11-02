@@ -17,6 +17,12 @@ class Game {
     this.observers.push(observer);
   }
 
+  removeObserver(observer) {
+    if (this.observers.includes(observer)) {
+      this.observers.splice(this.observers.indexOf(observer), 1);
+    }
+  }
+
   update() {
     if (this.timerId === null) {
       this.timerId = setInterval(() => {

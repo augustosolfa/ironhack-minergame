@@ -5,9 +5,13 @@ function endRender(boardRender) {
   const boardNode = boardRender.node;
 
   for (let i in logicalMatrix) {
+    const nodeRow = boardNode.childNodes[i];
     for (let j in logicalMatrix[i]) {
       const logicalSquare = logicalMatrix[i][j];
-      const nodeSquare = boardNode.childNodes[i].childNodes[j];
+      const nodeSquare = nodeRow.childNodes[j];
+      if (!nodeSquare) {
+        console.log(nodeSquare, i, j);
+      }
       if (logicalSquare.state === State.Revealed) {
         continue;
       }

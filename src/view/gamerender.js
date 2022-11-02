@@ -27,6 +27,7 @@ class GameRender {
 
   newGame(width, height, numberOfBombs) {
     this.game.new(width, height, numberOfBombs);
+    this.game.removeObserver(this.boardRender);
     this.boardRender = new BoardRender(this.game);
     this.game.notifyObservers();
     const levelSection = document.getElementById("level");
