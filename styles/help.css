@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto:ital,wght@0,300;0,500;1,400&display=swap');
+
+* {
+  font-family: 'Fredoka One', cursive;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(13px + 1vw);
+}
+
+a {
+  text-decoration: none;
+  color: gray;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+}
+
+header a {
+  text-align: center;
+  margin: 1em 0;
+}
+
+header h1 {
+  text-align: center;
+  font-size: 4em;
+}
+
+main {
+  max-width: 800px;
+}
+
+section > h2 {
+  text-align: center;
+}
+
+.device {
+  display: inline;
+}
+
+.device div:first-child {
+  display: flex;
+  align-items: center;
+}
+
+footer {
+  align-self: flex-start;
+  font-size: small;
+}
